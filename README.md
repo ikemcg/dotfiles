@@ -64,3 +64,10 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 brew tap homebrew/cask-fonts
 brew cask install font-sourcecodepro-nerd-font
 ```
+
+#### Install Fuzzy Finder
+
+```
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
