@@ -33,7 +33,7 @@ The ALE (Asynchronous Lint Engine) plugin uses eslint for JavaScript linting.  I
 dependency on my projects, but I also like to install it sytem-wide with the following:
 
 ```
-npm install -g eslint
+sudo npm install -g eslint
 ```
 
 ### PHP CodeSniffer
