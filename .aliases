@@ -1,0 +1,106 @@
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+
+# ls
+alias ls='ls -GH'
+alias l='ls -lFh'     #size,show type,human readable
+alias la='ls -lAFh'   #long list,show almost all,show type,human readable
+alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
+alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
+alias ll='ls -al'     #long list
+alias l.='ls -d .*'
+alias lsd="ls -l | grep --color=never '^d'"
+alias ldot='ls -ld .*'
+alias lS='ls -1FSsh'
+alias lart='ls -1Fcart'
+alias lrt='ls -1Fcrt'
+
+# Shortcuts
+alias db="cd ~/Dropbox"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias g="git"
+alias h="history"
+alias j="jobs"
+alias gr='egrep -Irn --exclude="\.git" --exclude="*\.log"'
+alias 'ps?'='ps ax | grep '
+alias 'h?'='history | grep '
+alias fn='find . -name'
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+
+# create parent directories on demand
+alias mkdir='mkdir -pv'
+
+# start calculator with math support
+alias bc='bc -l'
+
+# git aliases
+alias gitupall='git submodule foreach git pull'
+
+alias vim='mvim -v'
+
+# don't create swp file when opening encryped files
+alias vimenc='vim -u ~/.vim_encrypted_rc -x'
+#
+# open files quickly with fasd
+alias v='f -e vim'
+
+alias bounce_apache='sudo apache restart'
+alias bounce_mysql='sudo /Library/StartupItems/MySQLCOM/MySQLCOM restart'
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g'
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Flush Directory Service cache
+alias flush="sudo killall -HUP mDNSResponder"
+
+# Canonical hex dump; some systems have this symlinked
+command -v hd > /dev/null || alias hd="hexdump -C"
+
+# Copy file contents to clipboard
+alias c="pbcopy <"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+# Merge PDF files
+# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+	alias "$method"="lwp-request -m '$method'"
+done
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
