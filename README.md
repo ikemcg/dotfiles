@@ -4,9 +4,9 @@ Dotfiles for zsh, vim, git, tmux and more
 
 ## Installation
 
-Install the dotfiles by cloning the repo to a directory in your home dir, then running the `create_links` scripts
-to create a a symlink to each file within my home dir.  This feels cleaner to me than placing the repo at the
-level of the home dir and excluding everything but the dotfiles.
+Install the dotfiles by cloning the repo to a directory in your home dir, and running the repo's `create_links`
+script.  The script creates symlinks in your home directory for each dotfile in the repository.  This approach feels
+cleaner to me than placing the repo at the level of the home dir and excluding everything but the dotfiles.
 
 Be aware that the symlinks created by `create_links` will clobber existing dotfiles.
 
