@@ -197,12 +197,18 @@ let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 
-" disable linting while typing
+"
+" ALE - Asynchronous Linting Engine
+:nnoremap <Leader>f :ALEFix<CR>
 let g:ale_linters = {
 \   'php': ['phpcs'],
+\   'javascript': ['eslint'],
 \}
 let g:ale_php_phpcs_standard='PSR2'
-let g:ale_fixers = {'php': ['php-cs-fixer']}
+let g:ale_fixers = {
+\   'php': ['php-cs-fixer'],
+\   'javascript': ['eslint'],
+\}
 
 " make YCM compatible with UltiSnips (using supertab)
 "let g:ycm_key_list_select_completion = ['<Down>']
