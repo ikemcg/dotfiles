@@ -21,7 +21,7 @@ Plugin 'godlygeek/tabular'                  " Text alignment
 Plugin 'mattn/emmet-vim'                    " Expands abbreviations
 Plugin 'maksimr/vim-jsbeautify'             " Beautify JS and CSS
 Plugin 'honza/vim-snippets'                 " Snippet repository for UltiSnips
-Plugin 'SirVer/ultisnips'                   " Snippets!
+"Plugin 'SirVer/ultisnips'                   " Snippets!
 "Plugin 'Shougo/deoplete'                    " Asynchronous completion framework
 "Plugin 'ervandew/supertab'
 "Plugin 'Valloric/YouCompleteMe'
@@ -206,7 +206,7 @@ let g:ale_linters = {
 \}
 let g:ale_php_phpcs_standard='PSR2'
 let g:ale_fixers = {
-\   'php': ['php-cs-fixer'],
+\   'php': ['php_cs_fixer'],
 \   'javascript': ['eslint'],
 \}
 
