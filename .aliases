@@ -5,7 +5,6 @@ alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
 # ls
-alias ls='ls -GH'
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
 alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
@@ -41,7 +40,10 @@ alias bc='bc -l'
 # git aliases
 alias gitupall='git submodule foreach git pull'
 
-alias vim='mvim -v'
+# use macvim on mac
+if [ "$(uname)" = "Darwin" ]; then
+  alias vim='mvim -v'
+fi
 
 # don't create swp file when opening encryped files
 alias vimenc='vim -u ~/.vim_encrypted_rc -x'
