@@ -122,3 +122,6 @@ unset file;
 
 # set fzf height and preview with bat
 export FZF_DEFAULT_OPTS='--height 40% --preview "bat --style=numbers --color=always {} | head -500"'
+
+# source local zsh config
+[ -f ~/.zsh.env ] && source ~/.zsh.env

@@ -18,7 +18,7 @@ for FILE in $FILES; do
         then
             rm "$HOME/.$FILE"
         fi
-        ln -s "$CWD/.$FILE" "$HOME/.$FILE"
+        ln -sf "$CWD/.$FILE" "$HOME/.$FILE"
         echo "$HOME/.$FILE linked to $CWD/.$FILE"
     fi
 done;
@@ -30,4 +30,4 @@ then
 fi
 
 # create a symlink at ~/.vim/snippets
-ln -s "$CWD/snippets" "$HOME/.vim/snippets"
+ln -sf "$CWD/snippets" "$HOME/.vim/snippets"
