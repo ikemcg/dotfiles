@@ -172,7 +172,7 @@ endif
 " use custom snippets, ignore defaults
 " let g:snippets_dir = "~/.vim/snippets"
 
-au BufRead,BufNewFile *.es6 set filetype=js
+au BufRead,BufNewFile *.es6 set filetype=javascript
 au BufRead,BufNewFile *.phtml set filetype=php
 
 " simplify moving between windows
