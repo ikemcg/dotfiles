@@ -49,7 +49,7 @@ composer global require "squizlabs/php_codesniffer=*"
 #### Antigen
 
 ```
-brew install antigen
+curl -L git.io/antigen > .antigen.zsh
 ```
 
 #### Powerlevel9k - zsh theme

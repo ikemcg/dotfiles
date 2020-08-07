@@ -1,4 +1,4 @@
-source /usr/local/share/antigen/antigen.zsh
+source ~/.antigen.zsh
 
 export TERM="xterm-256color"
 
