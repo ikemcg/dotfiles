@@ -30,7 +30,7 @@ alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
 alias j="jobs"
-alias gr='egrep -Irn --exclude="\.git" --exclude="*\.log"'
+alias gr='egrep -Irn --exclude-dir="node_modules" --exclude="\.git" --exclude="*\.log"'
 alias 'ps?'='ps ax | grep '
 alias 'h?'='history | grep '
 alias fn='find . -name'
