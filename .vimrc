@@ -200,6 +200,8 @@ let g:airline#extensions#ale#enabled = 1
 "
 " ALE - Asynchronous Linting Engine
 :nnoremap <Leader>f :ALEFix<CR>
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
 let g:ale_linters = {
 \   'php': ['phpcs'],
 \   'javascript': ['eslint'],
