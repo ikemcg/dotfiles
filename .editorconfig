@@ -1,13 +1,28 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# ###########################################################################
+# IX - this editorconfig file is used by js-beautify, which doesn't
+#      find the editorconfig file in project root dirs
+# ###########################################################################
+
+# top-most EditorConfig file
 root = true
 
+# Unix-style newlines with a newline ending every file
 [*]
 charset = utf-8
+indent_size = 4
 indent_style = space
-indent_size = 2
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{js,es6,css,less,scss}]
-indent_style = space
+; Indentation override for all JS under lib directory
+[**.css]
 indent_size = 2
+indent_style = space
+
+[**.js]
+indent_size = 2
+indent_style = space
+operator_position = after-newline
