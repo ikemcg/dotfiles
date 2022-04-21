@@ -30,7 +30,7 @@ alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
 alias j="jobs"
-alias gr='egrep -Irn --exclude-dir="node_modules" --exclude="\.git" --exclude="*\.log"'
+alias gr='egrep -Irn --exclude-dir="node_modules" --exclude-dir="vendor" --exclude="\.git" --exclude="*\.log"'
 alias 'ps?'='ps ax | grep '
 alias 'h?'='history | grep '
 alias fn='find . -name'
@@ -43,16 +43,13 @@ alias mkdir='mkdir -pv'
 # start calculator with math support
 alias bc='bc -l'
 
-# git aliases
-alias gitupall='git submodule foreach git pull'
-
 # use macvim on mac
 if [ "$(uname)" = "Darwin" ]; then
-  alias vim='mvim -v'
+  alias vim='nvim'
 fi
 
 # don't create swp file when opening encryped files
-alias vimenc='vim -u ~/.vim_encrypted_rc -x'
+alias vimenc='mvim -v -u ~/.vim_encrypted_rc -x'
 #
 # open files quickly with fasd
 alias v='f -e vim'

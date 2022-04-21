@@ -1,45 +1,46 @@
-" enable vundle
 set nocompatible        " use vim rather than vi settings, must be first line
 filetype off            " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'   " Soraized theme
-Plugin 'tpope/vim-surround'                 " Mappings for editing surroundings
-Plugin 'tpope/vim-repeat'                   " Extend . command support for vim-surroung
-Plugin 'dense-analysis/ale'                 " Asynchronous Lint Engine
-Plugin 'scrooloose/nerdtree'                " Filesystem tree explorer
-Plugin 'scrooloose/nerdcommenter'           " Commenting powers
-Plugin 'vim-airline/vim-airline'            " Lean & mean status/tabline
-Plugin 'vim-airline/vim-airline-themes'     " Airline themes
-Plugin 'majutsushi/tagbar'                  " Class outline viewer based on ctags
-Plugin 'godlygeek/tabular'                  " Text alignment
-Plugin 'mattn/emmet-vim'                    " Expands abbreviations
-Plugin 'maksimr/vim-jsbeautify'             " Beautify JS and CSS
-Plugin 'honza/vim-snippets'                 " Snippet repository for UltiSnips
-"Plugin 'SirVer/ultisnips'                   " Snippets!
-"Plugin 'Shougo/deoplete'                    " Asynchronous completion framework
-"Plugin 'ervandew/supertab'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'matchit.zip'                        " Extend % matching to HTML, LaTeX, and many other languages
-Plugin 'editorconfig/editorconfig-vim'      " Set editing prefs based on .editorconfig file
-"Plugin 'othree/yajs.vim'                    " JavaScript Syntax file
-Plugin 'pangloss/vim-javascript'            " Improved Javascript indentation and syntax support
-Plugin 'heavenshell/vim-jsdoc'              " Generate JSDoc
-Plugin 'tobyS/vmustache'
-Plugin 'tobyS/pdv'                          " PHP Documentor
-Plugin 'groenewege/vim-less'                " Indentation and highlighing for LESS files
-Plugin 'tpope/vim-markdown'                 " Syntax for Markdown
-Plugin 'jwalton512/vim-blade'               " Syntax for Blade files
-Plugin 'posva/vim-vue'                      " Syntax for Vue.js components
-Plugin 'junegunn/fzf'                       " Fuzzy finder for vim
-Plugin 'junegunn/fzf.vim'                   " Fuzzy finder for vim
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-call vundle#end()  " required
+Plug 'altercation/vim-colors-solarized'   " Soraized theme
+Plug 'tpope/vim-surround'                 " Mappings for editing surroundings
+Plug 'tpope/vim-repeat'                   " Extend . command support for vim-surroung
+Plug 'dense-analysis/ale'                 " Asynchronous Lint Engine
+Plug 'scrooloose/nerdtree'                " Filesystem tree explorer
+Plug 'scrooloose/nerdcommenter'           " Commenting powers
+Plug 'majutsushi/tagbar'                  " Class outline viewer based on ctags
+Plug 'godlygeek/tabular'                  " Text alignment
+Plug 'mattn/emmet-vim'                    " Expands abbreviations
+Plug 'maksimr/vim-jsbeautify'             " Beautify JS and CSS
+"Plug 'SirVer/ultisnips'                   " Snippets!
+Plug 'honza/vim-snippets'                 " Snippet repository for UltiSnips
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'editorconfig/editorconfig-vim'      " Set editing prefs based on .editorconfig file
+"Plug 'othree/yajs.vim'                    " JavaScript Syntax file
+Plug 'pangloss/vim-javascript'            " Improved Javascript indentation and syntax support
+Plug 'heavenshell/vim-jsdoc'              " Generate JSDoc
+Plug 'tobyS/vmustache'
+Plug 'tobyS/pdv'                          " PHP Documentor
+Plug 'groenewege/vim-less'                " Indentation and highlighing for LESS files
+Plug 'tpope/vim-markdown'                 " Syntax for Markdown
+Plug 'jwalton512/vim-blade'               " Syntax for Blade files
+Plug 'posva/vim-vue'                      " Syntax for Vue.js components
+Plug 'junegunn/fzf'                       " Fuzzy finder for vim
+Plug 'junegunn/fzf.vim'                   " Fuzzy finder for vim
+Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline
+Plug 'vim-airline/vim-airline-themes'     " Airline themes
+Plug 'hashivim/vim-terraform'             " Indentation and highlighting for Terraform files 
+
+" Initialize plugin system
+call plug#end()
 
 " colors
 syntax on
@@ -53,9 +54,6 @@ if has('python3')
 endif
 
 let g:gruvbox_contrast_dark = "hard"
-
-" enable Deoplete
-"let g:deoplete#enable_at_startup = 1
 
 " Turn on at 120 cols
 highlight ColorColumn guibg=#002b36
@@ -98,6 +96,9 @@ set title           " display file name in osx terminal's top window bar
 set hidden          " allows files in buffers to remain open
 set scrolloff=3     " maintains 3 lines below cursor as cursor moved outside viewport
 
+"highlight clear SignColumn
+highlight SignColumn ctermbg=black
+
 " `a returns to line and column marked by ma, and so is more usefull.  make it
 " easier to use, by swapping with '
 nnoremap ' `
@@ -129,6 +130,119 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal g'\"" | endif
 endif
+
+" """""""""""""""""""""""""""""""""""""""""""
+" Start Coc config
+" """""""""""""""""""""""""""""""""""""""""""
+set updatetime=300  " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays
+set shortmess+=c    " Don't pass messages to |ins-completion-menu|.
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" """""""""""""""""""""""""""""""""""""""""""
+" End Coc config
+" """""""""""""""""""""""""""""""""""""""""""
+
+" """""""""""""""""""""""""""""""""""""""""""
+" Start coc-snippets config
+" :CocInstall coc-snippets
+" """""""""""""""""""""""""""""""""""""""""""
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" """""""""""""""""""""""""""""""""""""""""""
+" End coc-snippets config
+" """""""""""""""""""""""""""""""""""""""""""
 
 " Abbreviations
 abbrev pft PHPUnit_Framework_TestCase
@@ -170,16 +284,16 @@ if !exists(":DiffOrig")
 endif
 
 " use custom snippets, ignore defaults
-" let g:snippets_dir = "~/.vim/snippets"
+"let g:snippets_dir = "~/.vim/snippets"
 
 au BufRead,BufNewFile *.es6 set filetype=javascript
 au BufRead,BufNewFile *.phtml set filetype=php
 
 " simplify moving between windows
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <leader>j <C-W><C-J>
+nnoremap <leader>k <C-W><C-K>
+noremap <leader>l <C-W><C-L>
+nnoremap <leader>h <C-W><C-H>
 
 " source .vimrc
 :nnoremap <Leader>sv :so $MYVIMRC<CR>
@@ -197,14 +311,24 @@ let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 
-"
 " ALE - Asynchronous Linting Engine
-:nnoremap <Leader>f :ALEFix<CR>
+let g:ale_disable_lsp = 1  " Leave lsp to coc.nvim
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+
+:nnoremap <Leader>af :ALEFix<CR>
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
+
+let g:ale_linter_aliases = {
+\   'vue': ['vue', 'javascript']
+\}
 let g:ale_linters = {
 \   'php': ['phpcs'],
 \   'javascript': ['eslint'],
+\   'vue': ['eslint', 'vls']
 \}
 let g:ale_php_phpcs_standard='PSR2'
 let g:ale_fixers = {
@@ -215,15 +339,16 @@ let g:ale_fixers = {
 " make YCM compatible with UltiSnips (using supertab)
 "let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-i>'
+"let g:SuperTabDefaultCompletionType = '<c-i>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+"let g:UltiSnipsExpandTrigger = "<tab>"
+"let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+"let g:UltiSnipsListSnippets = "<c-l>"
 
-nnoremap <C-n> :bnext<CR>
-nnoremap <C-p> :bprevious<CR>
+nnoremap <c-l> :bnext<CR>
+nnoremap <c-h> :bprevious<CR>
 
 " pluggin mappings
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
@@ -251,7 +376,7 @@ autocmd FileType less noremap <buffer> <leader>b :call CSSBeautify()<cr>
 map <Leader>jd :JsDoc<cr>
 
 " Fzf
-noremap <silent> <leader>o :Files<CR>
+noremap <silent> <c-p> :Files<CR>
 
 " Add phpDocumentor comment just above code block
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"

@@ -1,17 +1,18 @@
 [include]
 
-    # Include environment specific config.  I use this to set user.name/email based on directory
-    path = .gitconfig-env
+  # Include environment specific config.  I use this to set user.name/email based on directory
+  path = .gitconfig-env
 
 [alias]
 
-    # basics
-	cl = clone --recursive
-    cm = commit
-    co = checkout
-    cp = cherry-pick
-    s = status
-    r = reset
+  # basics
+  cl = clone --recursive
+  cm = commit
+  co = checkout
+  cp = cherry-pick
+  s = status
+  r = reset
+	p = pull
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -23,7 +24,7 @@
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules
-	p = !"git pull; git submodule foreach git pull origin master"
+	pa = !"git pull; git submodule foreach git pull origin master"
 
 	# Commit all changes
 	ca = !git add -A && git commit -av
@@ -173,3 +174,4 @@
 
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = main
