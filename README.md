@@ -17,15 +17,13 @@ dotfiles/create_links
 
 ## VIM Requirements
 
-### Vundle
+### Vim-Plug
 
-The vim config requires the Vundle (Vim bundle) plugin manager, which can be installed with the following:
+Install vim-plug using the instructions here:
 
-```bash
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
+https://github.com/junegunn/vim-plug
 
-Once installed, run `:PluginInstall` from within vim to install the plugins
+Once installed, run `:PlugInstall` from within vim to install the plugins
 
 ### Eslint
 
