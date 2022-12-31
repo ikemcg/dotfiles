@@ -37,14 +37,14 @@ Plug 'junegunn/fzf'                       " Fuzzy finder for vim
 Plug 'junegunn/fzf.vim'                   " Fuzzy finder for vim
 Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline
 Plug 'vim-airline/vim-airline-themes'     " Airline themes
-Plug 'hashivim/vim-terraform'             " Indentation and highlighting for Terraform files 
+Plug 'hashivim/vim-terraform'             " Indentation and highlighting for Terraform files
 
 " Initialize plugin system
 call plug#end()
 
 " colors
 syntax on
-"set termguicolors
+set termguicolors
 set background=dark
 colorscheme solarized
 
