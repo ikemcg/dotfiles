@@ -43,8 +43,8 @@ alias mkdir='mkdir -pv'
 # start calculator with math support
 alias bc='bc -l'
 
-# use macvim on mac
-if [ "$(uname)" = "Darwin" ]; then
+# use neovim if it's installed
+if [ -x "$(command -v nvim)" ]; then
   alias vim='nvim'
 fi
 
