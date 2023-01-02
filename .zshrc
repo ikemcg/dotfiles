@@ -7,8 +7,6 @@ fi
 
 source ~/.antigen.zsh
 
-export TERM="xterm-256color"
-
 # ########################################################################
 # End Powerlevel9
 # ########################################################################
@@ -32,6 +30,8 @@ if [ "$(uname)" = "Darwin" ]; then
     # add passphrase to ssh from keychain so we don't have to keep entering it
     ssh-add -A &> /dev/null
 fi
+
+eval $(keychain --eval --quiet --agents ssh id_ed25519)
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for settings you don’t want to commit.
