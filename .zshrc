@@ -31,7 +31,9 @@ if [ "$(uname)" = "Darwin" ]; then
     ssh-add -A &> /dev/null
 fi
 
-eval $(keychain --eval --quiet --agents ssh id_ed25519)
+if type "keychain" > /dev/null 2>&1; then
+    eval $(keychain --eval --quiet --agents ssh id_ed25519)
+fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for settings you don’t want to commit.

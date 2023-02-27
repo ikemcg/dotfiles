@@ -49,7 +49,7 @@ if [ -x "$(command -v nvim)" ]; then
 fi
 
 # don't create swp file when opening encryped files
-alias vimenc='mvim -v -u ~/.vim_encrypted_rc -x'
+alias vimenc='/usr/bin/vim -v -u ~/.vim_encrypted_rc -x'
 #
 # open files quickly with fasd
 alias v='f -e vim'
