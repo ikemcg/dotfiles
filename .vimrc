@@ -44,7 +44,7 @@ call plug#end()
 " colors
 syntax on
 set background=dark
- 41 let g:solarized_termtrans = 1 " This gets rid of the grey background
+let g:solarized_termtrans = 1 " This gets rid of the grey background
 colorscheme solarized
 
 " temporary fix for python 3 warnings
