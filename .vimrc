@@ -89,8 +89,6 @@ set smartcase       " turns off ignore case when pattern contains uppercase lett
 set visualbell      " don't beep
 set noerrorbells    " don't beep
 
-set cm=blowfish     " default encryption
-
 set title           " display file name in osx terminal's top window bar
 set hidden          " allows files in buffers to remain open
 set scrolloff=3     " maintains 3 lines below cursor as cursor moved outside viewport
