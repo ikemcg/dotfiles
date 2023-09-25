@@ -274,3 +274,12 @@ autocmd QuickFixCmdPost * nested cwindow | redraw!
 
 "autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
 "autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
+
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
