@@ -27,8 +27,13 @@ bindkey -v
 
 # if OSX
 if [ "$(uname)" = "Darwin" ]; then
-    # add passphrase to ssh from keychain so we don't have to keep entering it
-    ssh-add -A &> /dev/null
+	# add passphrase to ssh from keychain so we don't have to keep entering it
+	ssh-add -A &> /dev/null
+fi
+
+# Fix SSH auth socket location so agent forwarding works with tmux
+if test "$SSH_AUTH_SOCK" ; then
+	ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 fi
 
 # Load the shell dotfiles, and then some:
