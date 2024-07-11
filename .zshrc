@@ -32,8 +32,8 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # Fix SSH auth socket location so agent forwarding works with tmux
-if test "$SSH_AUTH_SOCK" ; then
-	ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+if [[ "$SSH_AUTH_SOCK" != "" && ! "$SSH_AUTH_SOCK" =~ "ssh_auth_sock" ]]; then
+  ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 fi
 
 # Load the shell dotfiles, and then some:
@@ -42,6 +42,20 @@ for file in ~/.{exports,paths,extra,aliases}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+# if OSX
+if [ "$(uname)" = "Darwin" ]; then
+    # add passphrase to ssh from keychain so we don't have to keep entering it
+    ssh-add -A &> /dev/null
+
+    # export variables required by homebrew
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    export PATH="$PATH:$HOME/.composer/vendor/bin"
+    export PATH="$PATH:/opt/homebrew/opt/mysql-client/bin"
+fi
 
 # enable fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

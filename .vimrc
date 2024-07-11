@@ -98,8 +98,8 @@ highlight SignColumn ctermbg=black
 
 " `a returns to line and column marked by ma, and so is more usefull.  make it
 " easier to use, by swapping with '
-nnoremap ' `
-nnoremap ` '
+"nnoremap ' `
+"nnoremap ` '
 
 " toggle spelling with F5
 "imap <F5> <C-o>:setlocal spell! spelllang=en_us<CR>
