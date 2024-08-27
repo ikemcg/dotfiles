@@ -65,6 +65,9 @@
   # List contributors with number of commits
   contributors = shortlog --summary --numbered
 
+  # clean local branches - delete tracking branches that no longer exist on remote
+  clb = "!git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
+
   # Merge GitHub pull request on top of the `master` branch
   mpr = "!f() { \
       if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
