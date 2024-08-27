@@ -11,6 +11,7 @@ source ~/.antigen.zsh
 # End Powerlevel9
 # ########################################################################
 
+antigen bundle jessarcher/zsh-artisan
 antigen bundle clvv/fasd
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme romkatv/powerlevel10k
@@ -68,3 +69,17 @@ export FZF_DEFAULT_OPTS='--height 40% --preview "bat --style=numbers --color=alw
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/ike/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/ike/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP binary.
+export PATH="/Users/ike/Library/Application Support/Herd/bin/":$PATH
