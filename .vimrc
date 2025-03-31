@@ -10,7 +10,7 @@ set encoding=utf-8
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'   " Soraized theme
+Plug 'EdenEast/nightfox.nvim'             " nightfox theme
 Plug 'tpope/vim-surround'                 " Mappings for editing surroundings
 Plug 'tpope/vim-repeat'                   " Extend . command support for vim-surroung
 Plug 'dense-analysis/ale'                 " Asynchronous Lint Engine
@@ -43,9 +43,9 @@ call plug#end()
 
 " colors
 syntax on
-set background=dark
+set background=light
 let g:solarized_termtrans = 1 " This gets rid of the grey background
-colorscheme solarized
+colorscheme dayfox
 
 " temporary fix for python 3 warnings
 if has('python3')
