@@ -36,6 +36,7 @@ alias 'h?'='history | grep '
 alias fn='find . -name'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
+alias tmux='tmux -2'
 
 # create parent directories on demand
 alias mkdir='mkdir -pv'

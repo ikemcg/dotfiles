@@ -37,13 +37,6 @@ if [[ "$SSH_AUTH_SOCK" != "" && ! "$SSH_AUTH_SOCK" =~ "ssh_auth_sock" ]]; then
   ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 fi
 
-# Load the shell dotfiles, and then some:
-# * ~/.extra can be used for settings you don’t want to commit.
-for file in ~/.{exports,paths,extra,aliases}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
 # if OSX
 if [ "$(uname)" = "Darwin" ]; then
     # add passphrase to ssh from keychain so we don't have to keep entering it
@@ -57,6 +50,13 @@ if [ "$(uname)" = "Darwin" ]; then
     export PATH="$PATH:$HOME/.composer/vendor/bin"
     export PATH="$PATH:/opt/homebrew/opt/mysql-client/bin"
 fi
+
+# Load the shell dotfiles, and then some:
+# * ~/.extra can be used for settings you don’t want to commit.
+for file in ~/.{exports,paths,extra,aliases}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
 
 # enable fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -83,3 +83,7 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/ike/Library/Application Support/Herd/con
 
 # Herd injected PHP binary.
 export PATH="/Users/ike/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/ike/Library/Application Support/Herd/config/php/82/"
