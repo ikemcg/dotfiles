@@ -10,8 +10,8 @@ set encoding=utf-8
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'EdenEast/nightfox.nvim'             " nightfox theme
 Plug 'tpope/vim-surround'                 " Mappings for editing surroundings
+Plug 'NLKNguyen/papercolor-theme'         " PaperColor scheme
 Plug 'tpope/vim-repeat'                   " Extend . command support for vim-surroung
 Plug 'dense-analysis/ale'                 " Asynchronous Lint Engine
 Plug 'scrooloose/nerdtree'                " Filesystem tree explorer
@@ -44,8 +44,9 @@ call plug#end()
 " colors
 syntax on
 set background=light
-let g:solarized_termtrans = 1 " This gets rid of the grey background
-colorscheme dayfox
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans = 1 " This gets rid of the grey background
+colorscheme PaperColor
 
 " temporary fix for python 3 warnings
 if has('python3')
@@ -55,8 +56,8 @@ endif
 let g:gruvbox_contrast_dark = "hard"
 
 " Turn on at 120 cols
-highlight ColorColumn guibg=#002b36
-let &colorcolumn=join(range(121,999),",")
+"highlight ColorColumn guibg=#eeeeee
+"let &colorcolumn=join(range(121,999),",")
 
 filetype plugin indent on       " turn on filetype, filetype plugins, and filetype indent
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
